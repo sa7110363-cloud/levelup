@@ -1,0 +1,375 @@
+.order-detail {
+  max-width: 1400px;
+}
+
+.detail-header {
+  margin-bottom: 32px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  color: #374151;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.back-button:hover {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+.back-button:active {
+  background-color: #f3f4f6;
+}
+
+.detail-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.detail-subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+.detail-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab-button {
+  padding: 12px 24px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-button:hover {
+  color: #111827;
+}
+
+.tab-button.active {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+  font-weight: 600;
+}
+
+.detail-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.info-card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.info-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 0.9375rem;
+  color: #111827;
+}
+
+.info-value.price {
+  font-weight: 600;
+  color: #111827;
+}
+
+.info-value.price.large {
+  font-size: 1.125rem;
+}
+
+.info-value.status-completed {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.info-value.status-failed {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.info-value.status-pending {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.info-value-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-value-secondary {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.payment-log-section {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.log-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.log-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.date-search {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.date-input {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 0;
+  font-size: 0.875rem;
+  width: 150px;
+  outline: none;
+  background-color: transparent;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.date-calendar-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  background-color: #ffffff;
+  border: none;
+  border-left: 1px solid #e5e7eb;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.date-calendar-button:hover {
+  background-color: #f9fafb;
+  color: #2563eb;
+}
+
+.excel-download-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.excel-download-button:hover {
+  background-color: #1d4ed8;
+}
+
+.log-count {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.log-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+}
+
+.log-icon-wrapper {
+  flex-shrink: 0;
+}
+
+.log-icon.approved {
+  color: #10b981;
+}
+
+.log-icon.request {
+  color: #3b82f6;
+}
+
+.log-icon.failed {
+  color: #ef4444;
+}
+
+.log-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.log-main-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.log-status {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.log-payer {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.log-secondary-info {
+  display: flex;
+  gap: 8px;
+}
+
+.log-transaction-id,
+.log-pg-company {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  background-color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.log-timestamp {
+  font-size: 0.8125rem;
+  color: #9ca3af;
+}
+
+.logs-management {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.logs-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1200px) {
+  .detail-content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .log-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .log-header-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .date-search {
+    width: 100%;
+  }
+
+  .date-input {
+    flex: 1;
+  }
+
+  .excel-download-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
