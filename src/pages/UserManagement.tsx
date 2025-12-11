@@ -78,10 +78,26 @@ const UserManagement = () => {
       bankName: '국민은행',
       accountNumber: '123-456-******78',
       accountHolder: '김강사'
+    },
+    {
+      id: 2,
+      name: '이강사',
+      email: 'lee@example.com',
+      bankName: '신한은행',
+      accountNumber: '456-789-******12',
+      accountHolder: '이강사'
+    },
+    {
+      id: 3,
+      name: '박강사',
+      email: 'park@example.com',
+      bankName: '우리은행',
+      accountNumber: '789-012-******34',
+      accountHolder: '박강사'
     }
   ]
 
-  const adminCategoryOptions = ['총관리자', '운영관리자', '정산관리자']
+  const adminCategoryOptions = ['운영관리자', '정산관리자']
 
   const administrators = [
     {
@@ -458,16 +474,6 @@ const UserManagement = () => {
                     <span className="account-detail-value">{instructor.accountHolder}</span>
                   </div>
                 </div>
-                <div className="account-actions">
-                  <button className="action-button verify">
-                    <Check size={16} />
-                    계좌 확인
-                  </button>
-                  <button className="action-button edit">
-                    <Edit size={16} />
-                    수정
-                  </button>
-                </div>
               </div>
             ))}
           </div>
@@ -499,11 +505,14 @@ const UserManagement = () => {
                         <button 
                           className="category-dropdown"
                           onClick={() => toggleDropdown(admin.id)}
+                          disabled={adminCategories[admin.id] === '총관리자'}
                         >
                           {adminCategories[admin.id]}
-                          <ChevronDown size={14} />
+                          {adminCategories[admin.id] !== '총관리자' && (
+                            <ChevronDown size={14} />
+                          )}
                         </button>
-                        {openDropdowns[admin.id] && (
+                        {openDropdowns[admin.id] && adminCategories[admin.id] !== '총관리자' && (
                           <div className="category-dropdown-menu">
                             {adminCategoryOptions.map((category) => (
                               <button

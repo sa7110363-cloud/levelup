@@ -190,9 +190,30 @@ const AIAssistant = () => {
       date: null
     }
   ])
+  const [showAddWordModal, setShowAddWordModal] = useState(false)
+  const [newWord, setNewWord] = useState('')
+  const [newWordType, setNewWordType] = useState('금지어')
 
   const handleDeleteWord = (id: number) => {
     setForbiddenWords(prev => prev.filter(word => word.id !== id))
+  }
+
+  const handleAddWord = () => {
+    if (newWord.trim()) {
+      const newId = Math.max(...forbiddenWords.map(w => w.id), 0) + 1
+      setForbiddenWords(prev => [
+        ...prev,
+        {
+          id: newId,
+          word: newWord.trim(),
+          type: newWordType,
+          date: new Date().toISOString().split('T')[0]
+        }
+      ])
+      setNewWord('')
+      setNewWordType('금지어')
+      setShowAddWordModal(false)
+    }
   }
 
   const handleSaveSettings = () => {
@@ -547,7 +568,10 @@ const AIAssistant = () => {
                   </div>
                 ))}
               </div>
-              <button className="add-word-button">
+              <button 
+                className="add-word-button"
+                onClick={() => setShowAddWordModal(true)}
+              >
                 <Plus size={18} />
                 단어 추가
               </button>
@@ -672,6 +696,66 @@ const AIAssistant = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 단어 추가 모달 */}
+      {showAddWordModal && (
+        <div className="modal-overlay" onClick={() => setShowAddWordModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3 className="modal-title">단어 추가</h3>
+              <button 
+                className="modal-close-button"
+                onClick={() => setShowAddWordModal(false)}
+              >
+                ×
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="modal-form-item">
+                <label className="modal-label">단어</label>
+                <input
+                  type="text"
+                  className="modal-input"
+                  value={newWord}
+                  onChange={(e) => setNewWord(e.target.value)}
+                  placeholder="단어를 입력하세요"
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleAddWord()
+                    }
+                  }}
+                />
+              </div>
+              <div className="modal-form-item">
+                <label className="modal-label">타입</label>
+                <select
+                  className="modal-select"
+                  value={newWordType}
+                  onChange={(e) => setNewWordType(e.target.value)}
+                >
+                  <option value="금지어">금지어</option>
+                  <option value="민감어">민감어</option>
+                </select>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button 
+                className="modal-button cancel"
+                onClick={() => setShowAddWordModal(false)}
+              >
+                취소
+              </button>
+              <button 
+                className="modal-button confirm"
+                onClick={handleAddWord}
+                disabled={!newWord.trim()}
+              >
+                추가
+              </button>
             </div>
           </div>
         </div>

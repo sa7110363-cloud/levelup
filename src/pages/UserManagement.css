@@ -664,9 +664,21 @@
   justify-content: space-between;
 }
 
-.category-dropdown:hover {
+.category-dropdown:hover:not(:disabled) {
   background-color: #f9fafb;
   border-color: #d1d5db;
+}
+
+.category-dropdown.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background-color: #f9fafb;
+}
+
+.category-dropdown:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background-color: #f9fafb;
 }
 
 .category-dropdown-menu {
