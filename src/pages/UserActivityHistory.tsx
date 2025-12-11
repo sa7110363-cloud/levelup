@@ -9,7 +9,7 @@ import {
 import './UserActivityHistory.css'
 
 const UserActivityHistory = () => {
-  const { userId } = useParams<{ userId: string }>()
+  const { userId: _userId } = useParams<{ userId: string }>()
   const navigate = useNavigate()
 
   // 실제로는 userId로 데이터를 가져와야 하지만, 예시 데이터 사용

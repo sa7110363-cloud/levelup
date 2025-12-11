@@ -11,7 +11,7 @@ import './NoticeFAQ.css'
 
 const NoticeFAQ = () => {
   const [activeTab, setActiveTab] = useState<'notice' | 'faq'>('notice')
-  const [statusFilter, setStatusFilter] = useState('전체 상태')
+  const [statusFilter] = useState('전체 상태')
 
   const noticeSummary = {
     total: 7,

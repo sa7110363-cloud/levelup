@@ -3,6 +3,16 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Download, CheckCircle2, Circle, Calendar, ChevronLeft } from 'lucide-react'
 import './OrderDetail.css'
 
+type PaymentLog = {
+  id: number
+  status: string
+  payer: string
+  transactionId: string | null
+  timestamp: string
+  pgCompany: string | null
+  type: string
+}
+
 const OrderDetail = () => {
   const { orderId } = useParams<{ orderId: string }>()
   const navigate = useNavigate()
@@ -316,7 +326,7 @@ const OrderDetail = () => {
         </div>
         <p className="log-count">총 {orderData.paymentLogs.length}개의 로그가 표시됩니다.</p>
         <div className="log-list">
-          {orderData.paymentLogs.map((log) => (
+          {orderData.paymentLogs.map((log: PaymentLog) => (
             <div key={log.id} className="log-item">
               <div className="log-icon-wrapper">
                 {getLogIcon(log.type)}

@@ -18,7 +18,7 @@ import './UserManagement.css'
 const UserManagement = () => {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<'list' | 'sanctions' | 'account' | 'permission'>('list')
-  const [userFilter, setUserFilter] = useState('전체 사용자')
+  const [userFilter] = useState('전체 사용자')
   const [openDropdowns, setOpenDropdowns] = useState<Record<number, boolean>>({})
   const [adminCategories, setAdminCategories] = useState<Record<number, string>>({
     1: '총관리자',

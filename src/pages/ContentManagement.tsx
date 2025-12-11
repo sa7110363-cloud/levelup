@@ -14,7 +14,7 @@ import './ContentManagement.css'
 
 const ContentManagement = () => {
   const [activeTab, setActiveTab] = useState<'review' | 'data'>('review')
-  const [statusFilter, setStatusFilter] = useState('전체 상태')
+  const [statusFilter] = useState('전체 상태')
 
   const files = [
     {

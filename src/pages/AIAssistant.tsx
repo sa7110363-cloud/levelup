@@ -24,8 +24,8 @@ import './AIAssistant.css'
 
 const AIAssistant = () => {
   const [activeTab, setActiveTab] = useState<'log' | 'stats' | 'keywords' | 'learning' | 'policy' | 'feedback'>('log')
-  const [responseTone, setResponseTone] = useState('전문적')
-  const [answerLength, setAnswerLength] = useState('짧게')
+  const [responseTone] = useState('전문적')
+  const [answerLength] = useState('짧게')
   const [systemMessage, setSystemMessage] = useState('당신은 강의 플랫폼의 AI어시스턴트입니다. 학습자들의 질문에 친절하고 정확하게 답변해주세요.')
 
   const stats = {
