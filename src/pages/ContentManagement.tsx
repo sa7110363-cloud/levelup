@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {
   Search,
   ChevronDown,
@@ -8,13 +8,18 @@ import {
   MoreVertical,
   EyeOff,
   FileText,
-  Download
+  Download,
+  XCircle
 } from 'lucide-react'
 import './ContentManagement.css'
 
 const ContentManagement = () => {
   const [activeTab, setActiveTab] = useState<'review' | 'data'>('review')
   const [statusFilter] = useState('전체 상태')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [lectureFilter, setLectureFilter] = useState('')
+  const [showAutocomplete, setShowAutocomplete] = useState(false)
+  const searchRef = useRef<HTMLDivElement>(null)
 
   const files = [
     {
@@ -36,8 +41,68 @@ const ContentManagement = () => {
       size: '8.2 MB',
       date: '2025.11.10',
       isVisible: false
+    },
+    {
+      id: 3,
+      fileName: 'python-data-analysis.zip',
+      instructor: '김철수',
+      category: '데이터 분석',
+      lectureTitle: 'Python 데이터 분석 A to Z',
+      size: '12.5 MB',
+      date: '2025.11.12',
+      isVisible: true
+    },
+    {
+      id: 4,
+      fileName: 'aws-advanced.zip',
+      instructor: '김승환',
+      category: '클라우드',
+      lectureTitle: 'AWS 클라우드 실전 가이드',
+      size: '20.3 MB',
+      date: '2025.11.15',
+      isVisible: true
     }
   ]
+
+  // 고유한 강의명 목록 추출
+  const uniqueLectures = Array.from(new Set(files.map(file => file.lectureTitle)))
+
+  // 자동완성 필터링된 강의명 목록
+  const filteredLectures = searchQuery
+    ? uniqueLectures.filter(lecture => 
+        lecture.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : []
+
+  // 검색어와 강의명 필터로 파일 필터링
+  const filteredFiles = files.filter(file => {
+    const matchesSearch = searchQuery === '' || 
+      file.fileName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      file.instructor.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      file.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      file.lectureTitle.toLowerCase().includes(searchQuery.toLowerCase())
+    
+    const matchesLecture = lectureFilter === '' || file.lectureTitle === lectureFilter
+    
+    return matchesSearch && matchesLecture
+  })
+
+  // 자동완성 외부 클릭 시 닫기
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowAutocomplete(false)
+      }
+    }
+
+    if (showAutocomplete) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showAutocomplete])
 
   const lectures = [
     {
@@ -233,23 +298,76 @@ const ContentManagement = () => {
 
       {activeTab === 'data' && (
         <>
-          {/* 검색 */}
+          {/* 검색 및 필터 */}
           <div className="data-filters">
-            <div className="search-box">
-              <Search size={20} />
-              <input
-                type="text"
-                placeholder="자료 검색..."
-                className="search-input"
-              />
+            <div className="search-box-wrapper" ref={searchRef}>
+              <div className="search-box">
+                <Search size={20} />
+                <input
+                  type="text"
+                  placeholder="자료 검색 또는 강의명으로 필터링..."
+                  className="search-input"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value)
+                    setShowAutocomplete(true)
+                  }}
+                  onFocus={() => setShowAutocomplete(true)}
+                />
+                {searchQuery && (
+                  <button
+                    className="search-clear-button"
+                    onClick={() => {
+                      setSearchQuery('')
+                      setLectureFilter('')
+                      setShowAutocomplete(false)
+                    }}
+                  >
+                    <XCircle size={18} />
+                  </button>
+                )}
+              </div>
+              {showAutocomplete && filteredLectures.length > 0 && (
+                <div className="autocomplete-dropdown">
+                  <div className="autocomplete-header">강의명으로 필터링</div>
+                  {filteredLectures.map((lecture) => (
+                    <button
+                      key={lecture}
+                      className={`autocomplete-item ${
+                        lectureFilter === lecture ? 'active' : ''
+                      }`}
+                      onClick={() => {
+                        setLectureFilter(lecture)
+                        setSearchQuery(lecture)
+                        setShowAutocomplete(false)
+                      }}
+                    >
+                      {lecture}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
+            {lectureFilter && (
+              <div className="active-filter-tag">
+                <span>{lectureFilter}</span>
+                <button
+                  onClick={() => {
+                    setLectureFilter('')
+                    setSearchQuery('')
+                  }}
+                >
+                  <X size={14} />
+                </button>
+              </div>
+            )}
           </div>
 
           {/* 자료 목록 */}
           <div className="data-list">
             <h2 className="data-list-title">자료 목록</h2>
             <div className="file-cards">
-              {files.map((file) => (
+              {filteredFiles.map((file) => (
                 <div key={file.id} className="file-card">
                   <div className="file-card-content">
                     <div className="file-icon">

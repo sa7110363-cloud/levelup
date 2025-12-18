@@ -22,41 +22,41 @@ const OrderDetail = () => {
   // 주문 데이터 매핑
   const ordersMap: Record<string, any> = {
     'ORD-2024-001': {
-      orderId: 'ORD-2024-001',
+    orderId: 'ORD-2024-001',
       orderDate: '2024-01-15',
-      customer: {
+    customer: {
         name: '홍길동',
         email: 'hong@example.com',
         phone: '010-1234-5678'
-      },
-      orderItem: {
-        name: '웹 개발 마스터 클래스',
-        price: 89000
-      },
-      payment: {
+    },
+    orderItem: {
+      name: '웹 개발 마스터 클래스',
+      price: 89000
+    },
+    payment: {
         method: '신용카드',
-        cardNumber: '**** **** **** 1234',
-        installment: '일시불',
-        status: '결제완료',
-        transactionId: 'TXN-20240115-001234',
-        approvalDate: '2024-01-15 14:35:28',
-        totalAmount: 89000
-      },
-      paymentLogs: [
-        {
-          id: 1,
-          status: '결제승인',
-          payer: '홍길동',
+      cardNumber: '**** **** **** 1234',
+      installment: '일시불',
+      status: '결제완료',
+      transactionId: 'TXN-20240115-001234',
+      approvalDate: '2024-01-15 14:35:28',
+      totalAmount: 89000
+    },
+    paymentLogs: [
+      {
+        id: 1,
+        status: '결제승인',
+        payer: '홍길동',
           transactionId: 'TXN-20240115-001234',
           timestamp: '2024-01-15 14:35:28',
-          pgCompany: null,
-          type: 'approved'
-        },
-        {
-          id: 2,
-          status: '카드사 승인 요청',
-          payer: '홍길동',
-          transactionId: null,
+        pgCompany: null,
+        type: 'approved'
+      },
+      {
+        id: 2,
+        status: '카드사 승인 요청',
+        payer: '홍길동',
+        transactionId: null,
           timestamp: '2024-01-15 14:35:25',
           pgCompany: 'Toss Payments',
           type: 'request'
@@ -134,10 +134,10 @@ const OrderDetail = () => {
           payer: '이정수',
           transactionId: null,
           timestamp: '2024-01-15 14:15:30',
-          pgCompany: 'Toss Payments',
-          type: 'request'
-        }
-      ]
+        pgCompany: 'Toss Payments',
+        type: 'request'
+      }
+    ]
     },
     'ORD-2024-004': {
       orderId: 'ORD-2024-004',
@@ -266,16 +266,16 @@ const OrderDetail = () => {
               </span>
             </div>
             {orderData.payment.transactionId && (
-              <div className="info-item">
-                <span className="info-label">거래 ID</span>
-                <span className="info-value">{orderData.payment.transactionId}</span>
-              </div>
+            <div className="info-item">
+              <span className="info-label">거래 ID</span>
+              <span className="info-value">{orderData.payment.transactionId}</span>
+            </div>
             )}
             {orderData.payment.approvalDate && (
-              <div className="info-item">
-                <span className="info-label">승인일시</span>
-                <span className="info-value">{orderData.payment.approvalDate}</span>
-              </div>
+            <div className="info-item">
+              <span className="info-label">승인일시</span>
+              <span className="info-value">{orderData.payment.approvalDate}</span>
+            </div>
             )}
             {orderData.payment.cardNumber && (
               <div className="info-item">

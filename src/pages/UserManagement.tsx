@@ -224,6 +224,35 @@ const UserManagement = () => {
     }
   ]
 
+  // 개인정보 마스킹 함수
+  const maskName = (name: string) => {
+    if (name.length <= 1) return name
+    return name[0] + '*'.repeat(name.length - 1)
+  }
+
+  const maskEmail = (email: string) => {
+    const [localPart, domain] = email.split('@')
+    if (!domain) return email
+    if (localPart.length <= 2) {
+      return '*'.repeat(localPart.length) + '@' + domain
+    }
+    const visibleLength = Math.floor(localPart.length / 3)
+    return localPart.substring(0, visibleLength) + '*'.repeat(localPart.length - visibleLength) + '@' + domain
+  }
+
+  const maskPhone = (phone: string) => {
+    // 010-1234-5678 형식
+    const parts = phone.split('-')
+    if (parts.length === 3) {
+      return `${parts[0]}-****-${parts[2]}`
+    }
+    // 다른 형식도 처리
+    if (phone.length >= 8) {
+      return phone.substring(0, 3) + '-****-' + phone.substring(phone.length - 4)
+    }
+    return phone
+  }
+
   const getRoleClass = (role: string) => {
     return role === '강사' ? 'role-instructor' : 'role-student'
   }
@@ -295,7 +324,7 @@ const UserManagement = () => {
                   <div className="user-card-main">
                     <div className="user-card-left">
                       <div className="user-header-info">
-                        <span className="user-name">{user.name}</span>
+                        <span className="user-name">{maskName(user.name)}</span>
                         <span className={`role-tag ${getRoleClass(user.role)}`}>
                           {user.role}
                         </span>
@@ -304,9 +333,9 @@ const UserManagement = () => {
                         </span>
                       </div>
                       <div className="user-contact-info">
-                        <span className="contact-item">이메일: {user.email}</span>
+                        <span className="contact-item">이메일: {maskEmail(user.email)}</span>
                         <span className="contact-separator">·</span>
-                        <span className="contact-item">전화번호: {user.phone}</span>
+                        <span className="contact-item">전화번호: {maskPhone(user.phone)}</span>
                       </div>
                       <div className="user-meta-info">
                         <span>가입일: {user.joinDate}</span>
@@ -403,10 +432,10 @@ const UserManagement = () => {
                     <div className="suspended-user-header">
                       <div className="suspended-user-info">
                         <div className="suspended-user-name-row">
-                          <span className="suspended-user-name">{user.name}</span>
+                          <span className="suspended-user-name">{maskName(user.name)}</span>
                           <span className="suspended-status-tag">정지</span>
                         </div>
-                        <div className="suspended-user-email">{user.email}</div>
+                        <div className="suspended-user-email">{maskEmail(user.email)}</div>
                         <div className="suspended-reason">
                           정지 사유: {user.suspensionReason}
                         </div>
